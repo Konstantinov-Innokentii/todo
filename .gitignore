@@ -1,0 +1,6 @@
+.idea
+.git.bkp
+*.pyc
+config.py
+node_modules/
+env/

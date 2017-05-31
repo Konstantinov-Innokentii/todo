@@ -1,0 +1,39 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "* Настроить отображение фигур (выравнивание, цвет, размер) * Реализовать перемещение фигур с помощью гиперссылок и redirect",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.1",
+    "backbone": "^1.3.3",
+    "classnames": "^2.2.5",
+    "jquery": "^3.1.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.7.6",
+    "babel-jest": "^16.0.0",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-object-rest-spread": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "css-loader": "^0.23.1",
+    "expose-loader": "^0.7.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "style-loader": "^0.13.1",
+    "webpack-bundle-tracker": "0.0.93"
+  }
+}

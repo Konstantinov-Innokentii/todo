@@ -1,0 +1,4 @@
+SQLALCHEMY_DATABASE_URI = 'postgresql://'
+SQLALCHEMY_ECHO = True
+
+DEBUG = True
