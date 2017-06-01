@@ -15,6 +15,7 @@ class TodoList extends React.Component {
         this.setState({text: e.target.value});
         console.log("CHANGED");
     }
+
     handleSubmit(e) {
     e.preventDefault();
     axios.post('/api/v1/note', {
@@ -25,13 +26,17 @@ class TodoList extends React.Component {
          }.bind(this)).catch(function (error) {console.log(error);});
     console.log("SUBMITTED")
     }
+
     del(id){
         console.log("deleted"+id);
         axios.delete('api/v1/note/'+id).then(function (response) {
-                console.log(response);
+            var remainder = this.props.items.filter((item) =>{
+                if (item.id !==id) return item; });
+            this.props.onItemDeleted(remainder);
             }.bind(this)).
         catch(function (error) {console.log(error);});
     }
+
     mark_done(id){
         axios.put('api/v1/note/'+id).then(function (response) {
                 console.log(response);
@@ -82,47 +87,17 @@ class App extends Component {
         axios.get("/api/v1/note").then(r => this.setState({items:r.data}));
         console.log("did get")
     }
-
   render() {
     return (
       <div>
-        <TodoList items={this.state.items} onItemAdded={(item) => this.setState({items: this.state.items.concat([item])})} />
+        <TodoList items={this.state.items}
+                  onItemAdded={(item) => this.setState({items: this.state.items.concat([item])})}
+                  onItemDeleted = {(remainder) => this.setState({items: remainder})}
+        />
       </div>
     );
   }
 
-  // handleChange(e) {
-  //   this.setState({text: e.target.value});
-  //   console.log("CHANGED");
-  // }
-  //(item) => this.setState({items: this.state.items.concat([item])})
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   axios.post('/api/v1/note', {
-  //            content: this.state.text,
-  //        })
-  //            .then(function (response) {
-  //                console.log(response);
-  //                var newItem = {
-  //                    text: response.data.content,
-  //                    id: response.data.id
-  //                };
-  //                this.setState((prevState) => ({
-  //                    items: prevState.items.concat(newItem),
-  //                    text: ''
-  //                }));
-  //            }).
-  //        catch(function (error) {console.log(error);});
-  //   // var newItem = {
-  //   //   text: this.state.text,
-  //   //   id: Date.now()
-  //   // };
-  //   // this.setState((prevState) => ({
-  //   //   items: prevState.items.concat(newItem),
-  //   //   text: ''
-  //   // }));
-  //   console.log("SUBMITTED")
-  // }
 }
 
 export default App;

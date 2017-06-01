@@ -21908,8 +21908,10 @@
 	        value: function del(id) {
 	            console.log("deleted" + id);
 	            _axios2.default.delete('api/v1/note/' + id).then(function (response) {
-	                console.log(response);
-	                this.props.onItemAdded(response.data);
+	                var remainder = this.props.items.filter(function (item) {
+	                    if (item.id !== id) return item;
+	                });
+	                this.props.onItemDeleted(remainder);
 	            }.bind(this)).catch(function (error) {
 	                console.log(error);
 	            });
@@ -22019,45 +22021,16 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(TodoList, { items: this.state.items, onItemAdded: function onItemAdded(item) {
+	                _react2.default.createElement(TodoList, { items: this.state.items,
+	                    onItemAdded: function onItemAdded(item) {
 	                        return _this5.setState({ items: _this5.state.items.concat([item]) });
-	                    } })
+	                    },
+	                    onItemDeleted: function onItemDeleted(remainder) {
+	                        return _this5.setState({ items: remainder });
+	                    }
+	                })
 	            );
 	        }
-	
-	        // handleChange(e) {
-	        //   this.setState({text: e.target.value});
-	        //   console.log("CHANGED");
-	        // }
-	        //(item) => this.setState({items: this.state.items.concat([item])})
-	        // handleSubmit(e) {
-	        //   e.preventDefault();
-	        //   axios.post('/api/v1/note', {
-	        //            content: this.state.text,
-	        //        })
-	        //            .then(function (response) {
-	        //                console.log(response);
-	        //                var newItem = {
-	        //                    text: response.data.content,
-	        //                    id: response.data.id
-	        //                };
-	        //                this.setState((prevState) => ({
-	        //                    items: prevState.items.concat(newItem),
-	        //                    text: ''
-	        //                }));
-	        //            }).
-	        //        catch(function (error) {console.log(error);});
-	        //   // var newItem = {
-	        //   //   text: this.state.text,
-	        //   //   id: Date.now()
-	        //   // };
-	        //   // this.setState((prevState) => ({
-	        //   //   items: prevState.items.concat(newItem),
-	        //   //   text: ''
-	        //   // }));
-	        //   console.log("SUBMITTED")
-	        // }
-	
 	    }]);
 	
 	    return App;
