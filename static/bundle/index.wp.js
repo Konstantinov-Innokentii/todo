@@ -21898,7 +21898,7 @@
 	            }).then(function (response) {
 	                this.props.onItemAdded(response.data);
 	                console.log(response);
-	            }).catch(function (error) {
+	            }.bind(this)).catch(function (error) {
 	                console.log(error);
 	            });
 	            console.log("SUBMITTED");
@@ -21909,7 +21909,8 @@
 	            console.log("deleted" + id);
 	            _axios2.default.delete('api/v1/note/' + id).then(function (response) {
 	                console.log(response);
-	            }).catch(function (error) {
+	                this.props.onItemAdded(response.data);
+	            }.bind(this)).catch(function (error) {
 	                console.log(error);
 	            });
 	        }

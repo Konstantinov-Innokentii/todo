@@ -20,16 +20,16 @@ class TodoList extends React.Component {
     axios.post('/api/v1/note', {
         content: this.state.text,
          }).then(function (response) {
-             this.props.onItemAdded(response.data)
+             this.props.onItemAdded(response.data);
              console.log(response);
-         }).catch(function (error) {console.log(error);});
+         }.bind(this)).catch(function (error) {console.log(error);});
     console.log("SUBMITTED")
     }
     del(id){
         console.log("deleted"+id);
         axios.delete('api/v1/note/'+id).then(function (response) {
                 console.log(response);
-            }).
+            }.bind(this)).
         catch(function (error) {console.log(error);});
     }
     mark_done(id){
