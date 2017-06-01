@@ -26,6 +26,7 @@ class NoteResource(Resource):
         return {}, 204
 
     def put(self, id):
+        print("WOW SUCH A PUT")
         note = note_schema.load(request.json)
         db.session.commit()
         return note_schema.dump(note.data).data, 201

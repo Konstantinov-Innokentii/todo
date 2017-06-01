@@ -21894,10 +21894,10 @@
 	        value: function handleSubmit(e) {
 	            e.preventDefault();
 	            _axios2.default.post('/api/v1/note', {
-	                content: this.state.text
+	                content: this.state.text,
+	                done: false
 	            }).then(function (response) {
 	                this.props.onItemAdded(response.data);
-	                console.log(response);
 	            }.bind(this)).catch(function (error) {
 	                console.log(error);
 	            });
@@ -21918,10 +21918,21 @@
 	        }
 	    }, {
 	        key: 'mark_done',
-	        value: function mark_done(id) {
-	            _axios2.default.put('api/v1/note/' + id).then(function (response) {
+	        value: function mark_done(id, done, content) {
+	            _axios2.default.put('/api/v1/note/' + id, {
+	                content: content,
+	                done: !done,
+	                id: id
+	            }).then(function (response) {
+	                var remainder = this.props.items.filter(function (item) {
+	                    if (item.id !== id) return item;
+	                });
+	                console.log(remainder);
+	                remainder = remainder.concat(response.data);
+	                console.log(remainder);
+	                this.props.onItemDoned(remainder);
 	                console.log(response);
-	            }).catch(function (error) {
+	            }.bind(this)).catch(function (error) {
 	                console.log(error);
 	            });
 	        }
@@ -21948,7 +21959,9 @@
 	                        ),
 	                        _react2.default.createElement(
 	                            'button',
-	                            { type: 'button' },
+	                            { type: 'button', onClick: function onClick() {
+	                                    return _this2.mark_done(item.id, item.done, item.content);
+	                                } },
 	                            'done'
 	                        )
 	                    )
@@ -22026,6 +22039,9 @@
 	                        return _this5.setState({ items: _this5.state.items.concat([item]) });
 	                    },
 	                    onItemDeleted: function onItemDeleted(remainder) {
+	                        return _this5.setState({ items: remainder });
+	                    },
+	                    onItemDoned: function onItemDoned(remainder) {
 	                        return _this5.setState({ items: remainder });
 	                    }
 	                })

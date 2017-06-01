@@ -20,9 +20,9 @@ class TodoList extends React.Component {
     e.preventDefault();
     axios.post('/api/v1/note', {
         content: this.state.text,
+        done : false
          }).then(function (response) {
              this.props.onItemAdded(response.data);
-             console.log(response);
          }.bind(this)).catch(function (error) {console.log(error);});
     console.log("SUBMITTED")
     }
@@ -37,11 +37,20 @@ class TodoList extends React.Component {
         catch(function (error) {console.log(error);});
     }
 
-    mark_done(id){
-        axios.put('api/v1/note/'+id).then(function (response) {
-                console.log(response);
-            }).
-        catch(function (error) {console.log(error);});
+    mark_done(id,done,content){
+        axios.put('/api/v1/note/'+id, {
+            content: content,
+            done: !done,
+            id: id
+         }).then(function (response) {
+             var remainder = this.props.items.filter((item) =>{
+                if (item.id  !==id)  return item; });
+             console.log(remainder);
+             remainder = remainder.concat(response.data);
+             console.log(remainder);
+             this.props.onItemDoned(remainder);
+             console.log(response);
+         }.bind(this)).catch(function (error) {console.log(error);});
     }
 
     render() {
@@ -52,7 +61,7 @@ class TodoList extends React.Component {
                 <li key={item.id}>
                     <textarea className={item.done ? "done" : ""} disabled={item.done} key={item.id} value={item.content}/>
                     <button type="button" onClick={() => this.del(item.id)}>del</button>
-                    <button type="button">done</button>
+                    <button type="button" onClick={() =>this.mark_done(item.id,item.done,item.content)}>done</button>
                 </li>
             </div>
       ));
@@ -93,6 +102,7 @@ class App extends Component {
         <TodoList items={this.state.items}
                   onItemAdded={(item) => this.setState({items: this.state.items.concat([item])})}
                   onItemDeleted = {(remainder) => this.setState({items: remainder})}
+                  onItemDoned  = {(remainder) => this.setState({items: remainder})}
         />
       </div>
     );

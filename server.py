@@ -12,19 +12,9 @@ db.init_app(app)
 
 app.register_blueprint(api_v1_bp, url_prefix="/api/v1")
 
-@app.route('/todos', methods=['GET', 'POST','DELETE'])
+@app.route('/todos', methods=['GET', 'POST','DELETE','PUT'])
 def render():
     return render_template("index.html")
-
-# @app.route('/todos/<id>',methods=['GET', 'PUT','DELETE'])
-# def render_todo(id):
-#     if request.method == 'GET':
-#         return redirect('api/v1/note/{}'.format(id))
-#     if request.method == 'PUT':
-#         print("PUT")
-#     if request.method == 'DELETE':
-#         print("DELETE")
-
 
 
 if __name__ == '__main__':

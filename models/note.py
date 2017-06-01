@@ -12,6 +12,11 @@ class Note(db.Model):
 
     def __init__(self, content):
         self.content = content
+
+    def __init__(self,content,done):
+        self.content = content
+        self.done=done
+
     def __repr__(self):
         return 'Contents is {}'.format(self.content)
 
