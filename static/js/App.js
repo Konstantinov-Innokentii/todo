@@ -30,7 +30,7 @@ class TodoList extends React.Component {
          }).then(function (response) {
              this.props.onItemAdded(response.data);
          }.bind(this)).catch(function (error) {console.log(error);});
-    console.log("SUBMITTED")
+    this.setState({text: ""});
     }
 
     del(id){
@@ -66,7 +66,7 @@ class TodoList extends React.Component {
       var listItems = todoEntries.map(item => (
             <div className="element">
                 <li key={item.id}>
-                    <input className={item.done ? "done" : ""} disabled={item.done} key={item.id} value={item.content} readOnly={true}/>
+                    <input  className={item.done ? "done" : ""} disabled={item.done} key={item.id} value={item.content} readOnly={true}/>
                     <button type="button" onClick={() => this.del(item.id)}>del</button>
                     <button type="button" onClick={() =>this.mark_done(item.id,item.done,item.content)}>done</button>
                 </li>
@@ -81,7 +81,7 @@ class TodoList extends React.Component {
                   </ul>
               </div>
               <form className="inputForm" onSubmit={this.handleSubmit}>
-                  <input onChange={this.handleChange} value={this.state.text} />
+                  <input placeholder="input task" onChange={this.handleChange} value={this.state.text} />
                   <button>{'Add #' + (this.props.items.length + 1)}</button>
               </form>
           </div>

@@ -21908,7 +21908,7 @@
 	            }.bind(this)).catch(function (error) {
 	                console.log(error);
 	            });
-	            console.log("SUBMITTED");
+	            this.setState({ text: "" });
 	        }
 	    }, {
 	        key: 'del',
@@ -21993,7 +21993,7 @@
 	                _react2.default.createElement(
 	                    'form',
 	                    { className: 'inputForm', onSubmit: this.handleSubmit },
-	                    _react2.default.createElement('input', { onChange: this.handleChange, value: this.state.text }),
+	                    _react2.default.createElement('input', { placeholder: 'input task', onChange: this.handleChange, value: this.state.text }),
 	                    _react2.default.createElement(
 	                        'button',
 	                        null,
