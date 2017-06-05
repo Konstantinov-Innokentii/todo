@@ -1,52 +1,59 @@
 body {
-  padding: 50px;
-  background-color: grey;
-  font-family: sans-serif;
-}
-.todoListMain .header input {
-  padding: 10px;
-  font-size: 16px;
-  border: 2px solid #FFF;
-}
-.todoListMain .header button {
-  padding: 10px;
-  font-size: 16px;
-  margin: 10px;
-  background-color: darkgray;
-  color: #FFF;
-  border: 2px solid darkgray;
+    padding: 10px;
+    background-color: white;
+    font-family: sans-serif;
+    text-align: center;
 }
 
-.todoListMain .header button:hover {
-  border: 2px solid white;
-  cursor: pointer;
+h1 {
+    font-weight: 100 ;
+    color: black;
 }
-.todoListMain .theList {
-  list-style: none;
-  padding-left: 0;
-  width: 255px;
+ul {
+    padding-left: 0;
 }
+li {
+    list-style-type: none;
 
-.todoListMain .theList li {
-    color: #333;
-    background-color: rgba(255, 255, 255, .5);
+}
+.element .done{
+    text-decoration: line-through;
+}
+.element input{
+
+    border: 1px solid black;
+    font-weight: 100;
     padding: 15px;
-    margin-bottom: 5px;
-    margin-top: 10px;
-    border-radius: 5px;
+    font-size: 20px;
+    margin:5px;
+}
+.element button{
+    padding: 10px;
+    font-size: 20px;
+    margin: 3px;
+    background-color: #FFF;
+    border: 1px solid black;
+    font-weight: 100;
 
 }
-.todoListMain .element button {
-  padding: 5px;
-  font-size: 16px;
-  margin: 1px;
-  background-color: darkgray;
-  color: #FFF;
-  border: 2px solid darkgray;
+.inputForm input
+{
+    padding: 15px;
+    font-weight: 100;
+    font-size: 20px;
+    border: 1px solid black;
+    margin-right: 32px;
 
 }
-.todoListMain .doned {
-  text-decoration: line-through;
+.inputForm button {
+    padding: 10px;
+    font-size: 20px;
+    background-color: #FFF;
+    border: 1px solid black;
+    font-weight: 100;
 
 }
+
+
+
 /*# sourceMappingURL=index.wp.css.map*/

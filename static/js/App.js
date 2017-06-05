@@ -8,6 +8,7 @@ class TodoList extends React.Component {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        //this.handleCorr = this.handleCorr.bind(this);
         this.state = {text: '' ,};
     }
 
@@ -15,6 +16,11 @@ class TodoList extends React.Component {
         this.setState({text: e.target.value});
         console.log("CHANGED");
     }
+    // handleCorr(e){
+    //     this.setState({changing:true});
+    //      this.setState({correction: e.target.value});
+    //      console.log("CHANGED corr");
+    // }
 
     handleSubmit(e) {
     e.preventDefault();
@@ -44,8 +50,9 @@ class TodoList extends React.Component {
             id: id
          }).then(function (response) {
              var remainder = this.props.items.filter((item) =>{
-                if (item.id  !==id)  return item; });
-             console.log(remainder);
+                if (item.id  !==id)
+                    return item;
+             });
              remainder = remainder.concat(response.data);
              console.log(remainder);
              this.props.onItemDoned(remainder);
@@ -59,20 +66,21 @@ class TodoList extends React.Component {
       var listItems = todoEntries.map(item => (
             <div className="element">
                 <li key={item.id}>
-                    <textarea className={item.done ? "done" : ""} disabled={item.done} key={item.id} value={item.content}/>
+                    <input className={item.done ? "done" : ""} disabled={item.done} key={item.id} value={item.content} readOnly={true}/>
                     <button type="button" onClick={() => this.del(item.id)}>del</button>
                     <button type="button" onClick={() =>this.mark_done(item.id,item.done,item.content)}>done</button>
                 </li>
             </div>
       ));
       return (
-          <div>
-              <h3>TODO</h3>
+          <div className="todoList">
+              <h1>TO-DO</h1>
               <div className="todoItems">
-                  <ul className="theList">
+                  <ul>
                       {listItems}
-                  </ul></div>
-              <form onSubmit={this.handleSubmit}>
+                  </ul>
+              </div>
+              <form className="inputForm" onSubmit={this.handleSubmit}>
                   <input onChange={this.handleChange} value={this.state.text} />
                   <button>{'Add #' + (this.props.items.length + 1)}</button>
               </form>

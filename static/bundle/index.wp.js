@@ -21879,6 +21879,7 @@
 	
 	        _this.handleChange = _this.handleChange.bind(_this);
 	        _this.handleSubmit = _this.handleSubmit.bind(_this);
+	        //this.handleCorr = this.handleCorr.bind(this);
 	        _this.state = { text: '' };
 	        return _this;
 	    }
@@ -21889,6 +21890,12 @@
 	            this.setState({ text: e.target.value });
 	            console.log("CHANGED");
 	        }
+	        // handleCorr(e){
+	        //     this.setState({changing:true});
+	        //      this.setState({correction: e.target.value});
+	        //      console.log("CHANGED corr");
+	        // }
+	
 	    }, {
 	        key: 'handleSubmit',
 	        value: function handleSubmit(e) {
@@ -21927,7 +21934,6 @@
 	                var remainder = this.props.items.filter(function (item) {
 	                    if (item.id !== id) return item;
 	                });
-	                console.log(remainder);
 	                remainder = remainder.concat(response.data);
 	                console.log(remainder);
 	                this.props.onItemDoned(remainder);
@@ -21949,7 +21955,7 @@
 	                    _react2.default.createElement(
 	                        'li',
 	                        { key: item.id },
-	                        _react2.default.createElement('textarea', { className: item.done ? "done" : "", disabled: item.done, key: item.id, value: item.content }),
+	                        _react2.default.createElement('input', { className: item.done ? "done" : "", disabled: item.done, key: item.id, value: item.content, readOnly: true }),
 	                        _react2.default.createElement(
 	                            'button',
 	                            { type: 'button', onClick: function onClick() {
@@ -21969,24 +21975,24 @@
 	            });
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'todoList' },
 	                _react2.default.createElement(
-	                    'h3',
+	                    'h1',
 	                    null,
-	                    'TODO'
+	                    'TO-DO'
 	                ),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'todoItems' },
 	                    _react2.default.createElement(
 	                        'ul',
-	                        { className: 'theList' },
+	                        null,
 	                        listItems
 	                    )
 	                ),
 	                _react2.default.createElement(
 	                    'form',
-	                    { onSubmit: this.handleSubmit },
+	                    { className: 'inputForm', onSubmit: this.handleSubmit },
 	                    _react2.default.createElement('input', { onChange: this.handleChange, value: this.state.text }),
 	                    _react2.default.createElement(
 	                        'button',
